@@ -1,14 +1,14 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './App.css';
 
 import Navbar from './components/layout/top-navbar';
-import WeatherCard from './components/util/weather-card';
+import CardRow from './components/util/card-row';
 
 function App() {
   return (
     <div className="App">
       <Navbar />
-      <WeatherCard />
+      <CardRow />
     </div>
   );
 }

@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import { faBars } from '@fortawesome/free-solid-svg-icons';
 
 //TODO: - Fix spacing issues
 
@@ -20,7 +19,7 @@ const Navbar = () => {
 				style={{cursor: 'pointer'}}
 				onClick={() => toggleSidebar()}
       >
-				<FontAwesomeIcon icon={faBars} size="lg"/>
+				<FontAwesomeIcon icon={['fas', 'bars']} size="lg"/>
 				Weather App
 			</a>
 	</header>

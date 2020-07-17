@@ -12,7 +12,7 @@
 /build
 
 # keys
-/server/src/config/config.env
+/server/config/config.env
 
 # misc
 .DS_Store

@@ -9,13 +9,13 @@ var debug = require('debug')('server:server');
 var http = require('http');
 
 const path = require('path');
-require('dotenv').config({path: path.resolve(__dirname, '../config/config.env')});
+require('dotenv').config({path: `${__dirname}/../config/config.env`});
 
 /**
  * Get port from environment and store in Express.
  */
 
-var port = normalizePort(process.env.PORT || '1337');
+var port = normalizePort(process.env.PORT || '9000');
 app.set('port', port);
 
 /**

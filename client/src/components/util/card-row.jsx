@@ -1,9 +1,23 @@
-import React, {useState, useEffect} from 'react';
+import React, {useReducer, useEffect} from 'react';
 import Card from './card/card';
 import Services from '../../services/services';
 
+const reducer = (list, action) => {
+  const {type, data, index} = action;
+  switch (type) {
+    case 'ADD_CARD':
+      return( index < list.length ? [...list.slice(0,index), data, ...list.slice(index+1)] : list.concat([data]));
+    case 'REMOVE_CARD':
+      return(list.filter((_,i) => i !== index));
+    default:
+      return list;
+  }
+}
+
 const CardRow = () => {
-  const [idList, changeIdList] = useState(() => {
+  const [idList, changeIdList] = useReducer(reducer, []);
+
+  useEffect(() => {
     // const savedList = JSON.parse(window.localStorage.getItem('saved-ids'));
     // console.log('savedlist', savedList);
 
@@ -13,20 +27,19 @@ const CardRow = () => {
     //   return dataList;
     // };
 
-    // return !!savedList && savedList.length > 0 ? await savedWeather(savedList) : [];
-    return [];
-  });
+    // changeIdList( !!savedList && savedList.length > 0 ? savedWeather(savedList) : [] );
+  }, []);
 
   useEffect(() => {
     window.localStorage.setItem('saved-ids', JSON.stringify(idList.map((data) => data.id)));
-  });
+  }, [idList]);
 
-  const onDelete = (index) => {
-    changeIdList(idList.filter((_,i) => i !== index));
-  };
-
-  const onAdd = (data, index) => {
-    changeIdList( index < idList.length ? [...idList.slice(0,index), data, ...idList.slice(index+1)] : idList.concat([data]));
+  const handleChange = (type, {data, index}) => {
+    changeIdList({
+      type: type,
+      data: data,
+      index: index,
+    });
   };
   
   console.log('outside', idList);
@@ -36,11 +49,11 @@ const CardRow = () => {
       className="card-row body"
     >
       {idList.length > 0 && 
-        idList.map((data, index) => <Card onDelete={(index) => onDelete(index)} onAdd={(data, index) => onAdd(data, index)} initData={data} index={index}/>
+        idList.map((data, index) => <Card onChange={(type, payload) => handleChange(type, payload)} initData={data} index={index}/>
         )
       }
       {idList.length < 10 &&
-        <Card onAdd={(data, index) => onAdd(data, index)} index={idList.length}/>
+        <Card onChange={(type, payload) => handleChange(type, payload)} index={idList.length}/>
       }
     </div>
   );

@@ -4,20 +4,21 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import CitySearcher from './city-searcher';
 import WeatherCard from './weather-card';
 
-const Card = ({ onDelete, onAdd, index, initData }) => {
+const Card = ({ onChange, index, initData }) => {
   const [isActive, setActive] = useState(false);
-  const [data] = useState(initData);
+  //const [data] = useState(initData);
 
   const onSubmit = async (data) => {
-    onAdd(await data, index);
+    const payload = {data: await data, index: index};
+    onChange('ADD_CARD', payload);
     setActive(false);
   }
 
   return (
     isActive ? 
       <CitySearcher onSubmit={(data) => onSubmit(data)} onBlur={() => setActive(false)} />
-    : !!data ?
-      <WeatherCard index={index} data={data} onDelete={() => onDelete(index)} onEdit={() => setActive(true)}/>
+    : !!initData ?
+      <WeatherCard index={index} data={initData} onDelete={(index) => onChange('REMOVE_CARD', {index: index})} onEdit={() => setActive(true)}/>
     :
       <a className="card hover-card addButton" onClick={() => setActive(true)}>
         <span id="add-text">

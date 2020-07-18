@@ -18,7 +18,7 @@ const CitySearcher = ({onSubmit, onBlur}) => {
     onSubmit(getData());
     setLoading(false);
     
-  }, [id]);
+  }, [loading, id]);
 
   const cities=[
     { name: 'Melbourne',
@@ -42,7 +42,7 @@ const CitySearcher = ({onSubmit, onBlur}) => {
     },
   ]
 
-  function createLabel({name, state, country}) {
+  function createLabel({name, country}) {
     return `${name}, ${country}`;
   }
 

@@ -34,9 +34,9 @@ const CardRow = () => {
     window.localStorage.setItem('saved-ids', JSON.stringify(idList.map((data) => data.id)));
   }, [idList]);
 
-  const handleChange = (type, {data, index}) => {
+  const handleChange = ({data, index}) => {
     changeIdList({
-      type: type,
+      type: !!data ? 'ADD_CARD' : 'REMOVE_CARD',
       data: data,
       index: index,
     });
@@ -47,11 +47,11 @@ const CardRow = () => {
       className="card-row body"
     >
       {idList.length > 0 && 
-        idList.map((data, index) => <Card onChange={(type, payload) => handleChange(type, payload)} initData={data} index={index}/>
+        idList.map((data, index) => <Card onChange={(payload) => handleChange(payload)} initData={data} index={index}/>
         )
       }
       {idList.length < 10 &&
-        <Card onChange={(type, payload) => handleChange(type, payload)} index={idList.length}/>
+        <Card onChange={(payload) => handleChange(payload)} index={idList.length}/>
       }
     </div>
   );

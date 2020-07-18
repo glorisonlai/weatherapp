@@ -9,7 +9,7 @@ const Card = ({ onChange, index, initData }) => {
 
   const onSubmit = async (data) => {
     const payload = {data: await data, index: index};
-    onChange('ADD_CARD', payload);
+    onChange(payload);
     setActive(false);
   }
 
@@ -17,7 +17,7 @@ const Card = ({ onChange, index, initData }) => {
     isActive ? 
       <CitySearcher onSubmit={(data) => onSubmit(data)} onBlur={() => setActive(false)} />
     : !!initData ?
-      <WeatherCard index={index} data={initData} onDelete={(index) => onChange('REMOVE_CARD', {index: index})} onEdit={() => setActive(true)}/>
+      <WeatherCard index={index} data={initData} onDelete={(index) => onChange({index: index})} onEdit={() => setActive(true)}/>
     :
       <a className="card hover-card addButton" onClick={() => setActive(true)}>
         <span id="add-text">

@@ -41,8 +41,6 @@ const CardRow = () => {
       index: index,
     });
   };
-  
-  console.log('outside', idList);
 
   return (
     <div 

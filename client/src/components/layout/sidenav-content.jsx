@@ -2,8 +2,6 @@ import React, { useEffect } from 'react';
 import Switch from 'react-switch';
 import useGlobalState from '../../services/configContext'
 
-// TODO: Figure out how to make global changes with changed state
-
 const SideNavContent = () => {
   const [unit, changeUnit] = useGlobalState();
 

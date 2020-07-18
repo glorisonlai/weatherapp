@@ -6,7 +6,6 @@ import WeatherCard from './weather-card';
 
 const Card = ({ onChange, index, initData }) => {
   const [isActive, setActive] = useState(false);
-  //const [data] = useState(initData);
 
   const onSubmit = async (data) => {
     const payload = {data: await data, index: index};

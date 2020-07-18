@@ -1,0 +1,15 @@
+{
+  "short_name": "Wthr",
+  "name": "Weather",
+  "icons": [
+    {
+      "src": "02d@2x",
+      "type": "image/png",
+      "sizes": "100x100"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
+}

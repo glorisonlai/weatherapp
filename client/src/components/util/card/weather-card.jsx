@@ -6,7 +6,7 @@ import './weather-card.css';
 
 const WeatherCard = ({index, data, onDelete, onEdit}) => {
   const {
-    name, country, icon, desc, current, min, max, pressure, humidity, vision, windspeed, winddeg,
+    name, country, icon, desc, current, min, max, pressure, humidity, vision, windspeed, winddeg, sunrise, sunset, timezone,
   } = data || '';
   const [unit] = useGlobalState();
 
@@ -29,13 +29,13 @@ const WeatherCard = ({index, data, onDelete, onEdit}) => {
   }
 
   return !!name ? (
-    <div className='card weather-card'>
+    <div className='card weather-card unselectable'>
       <div className='card-head'>
         <a className='name' onClick={() => onEdit(name, country)} >
           <span>{name}</span>
         </a>
         <a className='button' onClick={() => onDelete(index)} >
-          <FontAwesomeIcon icon={['fas', 'times']}/>
+          <FontAwesomeIcon icon={['fas', 'times']} size={'xs'}/>
         </a>
       </div>
       <div className='card-body'>
@@ -47,7 +47,7 @@ const WeatherCard = ({index, data, onDelete, onEdit}) => {
           <span id='desc' className='capitalize'>{desc}</span>
         </div>
         <div style={styles.divider}/>
-        <div className='min-max'>
+        <div className='container'>
           <div className='contain-left'>
             <span>Min</span>
             <span className='stat'>{convertTemp(min)}</span>
@@ -87,7 +87,19 @@ const WeatherCard = ({index, data, onDelete, onEdit}) => {
       </div> 
     </div>
   ) : (
-    <div className="card weather-card" />
+    <div className='card weather-card'>
+      <div className='card-head'>
+        <a className='loading-cont' >
+          <span className="loading">Loading</span>
+          <span className="dot"></span>
+          <span className="dot"></span>
+          <span className="dot"></span>
+        </a>
+        <a className='button' onClick={() => onDelete(index)} >
+          <FontAwesomeIcon icon={['fas', 'times']} size={'xs'}/>
+        </a>
+      </div>
+    </div>
   );
 };
 

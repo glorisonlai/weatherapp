@@ -13,7 +13,7 @@ const Navbar = (props) => {
 
 	const TopNavbar = () => {
 		return (
-			<nav className={'navbar fixed-top'} style={{ width: '100vw' }} >
+			<nav className={'navbar fixed-top unselectable'} style={{ width: '100vw' }} >
 				{/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
 				<a
 					className="side-toggler"
@@ -23,8 +23,8 @@ const Navbar = (props) => {
 					onClick={() => toggleSidebar()}
 				>
 					<FontAwesomeIcon icon={['fas', 'bars']} size="lg"/>
+					<h2 className="title">Weather App</h2>
 				</a>
-				<h2 className="title">Weather App</h2>
 			</nav>
 		);
 	}

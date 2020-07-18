@@ -1,4 +1,4 @@
-import React, {useReducer, useEffect} from 'react';
+import React, {useState, useReducer, useEffect} from 'react';
 import Card from './card/card';
 import Services from '../../services/services';
 
@@ -6,28 +6,33 @@ const reducer = (list, action) => {
   const {type, data, index} = action;
   switch (type) {
     case 'ADD_CARD':
-      return( index < list.length ? [...list.slice(0,index), data, ...list.slice(index+1)] : list.concat([data]));
+      return( index < list.length ? [...list.slice(0,index), ...data, ...list.slice(index+1)] : list.concat(data));
     case 'REMOVE_CARD':
       return(list.filter((_,i) => i !== index));
     default:
-      return list;
+      return data;
   }
 }
 
 const CardRow = () => {
   const [idList, changeIdList] = useReducer(reducer, []);
+  const [scrollX, changeX] = useState({
+    startX: null, 
+    startScrollX: null
+  });
+  const savedList = JSON.parse(window.localStorage.getItem('saved-ids'));
 
   useEffect(() => {
-    // const savedList = JSON.parse(window.localStorage.getItem('saved-ids'));
-    // console.log('savedlist', savedList);
+    if (!savedList || !savedList.length) return;
+    
+    const saveWeather = async () => {
+      const validIds = savedList.filter(id => typeof(id) == 'number');
+      const dataList = await Promise.all(validIds.map((id) => Services.getWeather({locId: id})));
+      changeIdList({type: 'REPLACE', data: dataList});
+    };
 
-    // const savedWeather = async (savedList) => {
-    //   const validIds = savedList.filter(id => typeof(id) == 'number');
-    //   const dataList = await Promise.all(validIds.map((id) => Services.getWeather({locId: id})));
-    //   return dataList;
-    // };
-
-    // changeIdList( !!savedList && savedList.length > 0 ? savedWeather(savedList) : [] );
+    saveWeather();
+    changeIdList({type: 'REPLACE', data: savedList});
   }, []);
 
   useEffect(() => {
@@ -37,21 +42,54 @@ const CardRow = () => {
   const handleChange = ({data, index}) => {
     changeIdList({
       type: !!data ? 'ADD_CARD' : 'REMOVE_CARD',
-      data: data,
+      data: [data],
       index: index,
+    });
+  };
+
+  // Click to scroll
+  const handleMouseMove = ({clientX}) => {
+    const {startX, startScrollX} = scrollX;
+    const newX = startScrollX - clientX + startX;
+    window.scrollTo(newX, 0);
+    const windowScrollX = window.scrollX;
+    if (newX !== window.scrollX) {
+      changeX({
+        startX: clientX + windowScrollX - startScrollX,
+        startScrollX: startScrollX,
+      });
+    }
+  };
+
+  const handleMouseUp = () => {
+    if (scrollX.startX) {
+      window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('mouseup', handleMouseUp);
+      changeX({startX: null, startScrollX: null});
+    }
+  }
+
+  const handleMouseDown = ({target, clientX}) => {
+    if (target.className !== 'card-row body') return;
+    window.addEventListener('onmousemove', handleMouseMove);
+    window.addEventListener('mouseup', handleMouseUp);
+    changeX({
+      startX: clientX, 
+      startScrollX: window.scrollX,
     });
   };
 
   return (
     <div 
       className="card-row body"
+      onMouseDown={handleMouseDown}
     >
       {idList.length > 0 && 
-        idList.map((data, index) => <Card onChange={(payload) => handleChange(payload)} initData={data} index={index}/>
+        idList.map((data, index) => <Card initData={data} index={index} onChange={(payload) => handleChange(payload)}/>
         )
       }
       {idList.length < 10 &&
-        <Card onChange={(payload) => handleChange(payload)} index={idList.length}/>
+        <Card onChange={(payload) => handleChange(payload)}/>
       }
     </div>
   );

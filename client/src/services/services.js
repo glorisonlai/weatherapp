@@ -26,6 +26,14 @@ const Services = {
 
     return JSON.parse(await this.post(url, body));
   },
+
+  async getCities(data) {
+    const path='/get-cities';
+    const url = this.prepareUrl(path);
+    const body = this.prepareBody(data);
+
+    return JSON.parse(await this.post(url, body));
+  }
 }
 
 module.exports = Services;

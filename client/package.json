@@ -24,10 +24,12 @@
     "react-autocomplete": "^1.8.1",
     "react-device-detect": "^1.13.1",
     "react-dom": "^16.13.1",
+    "react-dragscroll": "^2.0.1",
     "react-scripts": "3.4.1",
     "react-sidebar": "^3.0.2",
     "react-switch": "^5.0.1",
-    "react-textarea-autosize": "^8.2.0"
+    "react-textarea-autosize": "^8.2.0",
+    "react-transition-group": "^4.4.1"
   },
   "scripts": {
     "start": "react-scripts start",

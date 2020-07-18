@@ -3,10 +3,11 @@ import { Autocomplete } from '@material-ui/lab';
 import { TextField, CircularProgress } from '@material-ui/core';
 import Services from '../../../services/services';
 
-const CitySearcher = ({onSubmit, onBlur}) => {
+const CitySearcher = ({onSubmit, onBlur, initVal}) => {
   const [loading, setLoading] = useState(false);
   const [value, setValue] = useState('');
   const [id, setId] = useState(0);
+  const [cities, setCities] = useState([]);
 
   useEffect(() =>  {
     if (!loading) return; 
@@ -20,27 +21,17 @@ const CitySearcher = ({onSubmit, onBlur}) => {
     
   }, [loading, id]);
 
-  const cities=[
-    { name: 'Melbourne',
-      country: 'AU',
-      id: 2158177,
-    },
-    { 
-      name: 'Melbourne',
-      country: 'US',
-      id: 4163971,
-    },
-    {
-      name: 'Sydney',
-      country: 'AU',
-      id: 2147714,
-    },
-    {
-      name: 'Toronto',
-      country: 'CA',
-      id: 6167865,
-    },
-  ]
+  useEffect(() => {
+    console.log(value);
+    if (value.length < 2) return;
+
+    const getCities = async() => {
+      setCities(await Services.getCities({query: value}));
+    }
+
+    getCities();
+    setCities([]);
+  }, [value])
 
   function createLabel({name, country}) {
     return `${name}, ${country}`;
@@ -50,6 +41,8 @@ const CitySearcher = ({onSubmit, onBlur}) => {
     setId(newId);
     setLoading(true);
   }
+
+  console.log(cities);
 
   return (
     <div className="card search-card">
@@ -79,7 +72,7 @@ const CitySearcher = ({onSubmit, onBlur}) => {
             }}
           />
         }
-        onChange={(e, value) => setLocation(value.id)}
+        onChange={(e, value) => !!value ? setLocation(value.id) : null}
       />
     </div>
   );

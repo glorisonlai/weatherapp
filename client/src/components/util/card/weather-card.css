@@ -9,13 +9,28 @@
   float: left;
   width: 70%;
   cursor: pointer;
+  filter: brightness(100%);
+  transition: 0.5s;
 }
+
+.name:hover {
+  transition: 0.5s;
+  filter: brightness(80%);
+}
+
 .button {
   padding-top: 5px;
   float: right;
   align-items: center;
   width: 20%;
   cursor: pointer;
+  filter: brightness(100%);
+  transition: 0.5s;
+}
+
+.button:hover {
+  transition: 0.5s;
+  filter: brightness(80%);
 }
 
 .main {
@@ -58,7 +73,7 @@
 }
 
 .container {
-  height: 13vh;
+  overflow: hidden;
   align-items: center;
   font-size: 2vh;
 }
@@ -77,4 +92,39 @@
 }
 .stat {
   font-size: 4vh;
+}
+
+/* LOADING ANIMATION */
+.laoding-cont {
+  position: absolute;
+  right: 0px;
+  bottom: 0px;
+}
+
+.dot {
+  width: 0.5rem;
+  height: 0.5rem;
+  background: var(--text-color);
+  display: inline-block;
+  border-radius: 50%;
+  right: 0px;
+  bottom: 0px;
+  margin: 0px 2.5px;
+  position: relative;
+  animation: jump 1s infinite;
+}
+.dot:nth-child(2) {
+  -webkit-animation-delay: 100ms;
+  animation-delay: 100ms;
+}
+
+.dot:nth-child(2) {
+  -webkit-animation-delay: 200ms;
+  animation-delay: 200ms;
+}
+
+@keyframes jump {
+  0%   {bottom: 0px;}
+  20%  {bottom: 5px;}
+  40%  {bottom: 0px;}
 }

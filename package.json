@@ -12,7 +12,8 @@
     "start": "cd server/bin && node www.js",
     "build": "cd client && npm run build",
     "install-client": "cd client && npm install",
-    "heroku-postbuild": "npm run install-client && npm run build",
+    "install-server": "cd server && npm install",
+    "heroku-postbuild": "npm run install-client && install-server && npm run build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

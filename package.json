@@ -9,8 +9,10 @@
   },
   "scripts": {
     "dev": "concurrently --kill-others \"cd client && npm start\" \"cd server && npm start\"",
-    "start": "react-scripts start",
+    "start": "cd server/bin && node www.js",
     "build": "cd client && npm run build && cd ..",
+    "install-client": "cd client && npm install and cd ..",
+    "heroku-postbuild": "npm run install-client && npm run build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

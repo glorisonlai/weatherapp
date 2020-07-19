@@ -28,6 +28,10 @@ app.use('/user', usersRouter);
 app.use('/open-weather', openWeatherRouter);
 app.use('/get-cities', citiesRouter);
 
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static('client/build'));
+}
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));

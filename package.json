@@ -4,20 +4,17 @@
   "private": true,
   "dependencies": {
     "react": "^16.13.1",
-    "react-scripts": "3.4.1"
-  },
-  "devDependancies": {
+    "react-scripts": "3.4.1",
     "concurrently": "^5.2.0"
   },
   "scripts": {
+    "dev-start": "npm run install-client && npm run install-server && npm run dev",
     "dev": "concurrently --kill-others \"cd client && npm start\" \"cd server && npm start\"",
-    "start": "node server/app.js",
     "build-client": "cd client && npm run build",
     "install-client": "cd client && npm install",
     "install-server": "cd server && npm install",
-    "heroku-postbuild": "npm run install-client && npm run install-server && npm run build-client",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "start": "node server/app.js",
+    "heroku-postbuild": "npm run install-client && npm run install-server && npm run build-client"
   },
   "eslintConfig": {
     "extends": "react-app"

@@ -6,7 +6,7 @@ const Services = {
   },
 
   prepareUrl(path) {
-    return 'http://localhost:1337' + path;
+    return path;
   },
 
   async post(url, body) {
@@ -34,6 +34,6 @@ const Services = {
 
     return JSON.parse(await this.post(url, body));
   }
-}
+};
 
-module.exports = Services;
+export default Services;

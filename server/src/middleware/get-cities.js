@@ -43,7 +43,7 @@ const Middleware  = {
     if (start === -1) return [];
     const end = this.lastBinarySearch(query, length);
     if (end === -1) return [];
-    return store.slice(start, Math.min(start+10, end+1) );
+    return store.slice(start, Math.min(start+20, end+1) );
   }
 };
 

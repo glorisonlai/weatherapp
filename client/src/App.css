@@ -1,5 +1,5 @@
 :root {
-  --ease-in-timer: 4s;
+  --ease-in-timer: 1s;
   --header-height: 55px;
   --text-color: azure;
 }
@@ -105,6 +105,13 @@
   width: 100vw;
   margin-top: calc(var(--header-height) + 1rem);
   border-right: 16rem solid #0000;
+}
+
+.placeholder {
+  display: inline-block;
+  position: relative;
+  height: 65vh;
+  min-width: 6rem;
 }
 
 .card {

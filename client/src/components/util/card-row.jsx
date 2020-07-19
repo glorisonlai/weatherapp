@@ -16,7 +16,7 @@ const reducer = (list, action) => {
 
 const CardRow = () => {
   const [idList, changeIdList] = useReducer(reducer, []);
-  const [scrollX, changeX] = useState({
+  const [scrollX, updateScrollX] = useState({
     startX: null, 
     startScrollX: null
   });
@@ -24,15 +24,15 @@ const CardRow = () => {
 
   useEffect(() => {
     if (!savedList || !savedList.length) return;
+    const validIds = savedList.filter(id => typeof(id) == 'number');
     
     const saveWeather = async () => {
-      const validIds = savedList.filter(id => typeof(id) == 'number');
       const dataList = await Promise.all(validIds.map((id) => Services.getWeather({locId: id})));
       changeIdList({type: 'REPLACE', data: dataList});
     };
 
     saveWeather();
-    changeIdList({type: 'REPLACE', data: savedList});
+    changeIdList({type: 'REPLACE', data: validIds});
   }, []);
 
   useEffect(() => {
@@ -54,7 +54,7 @@ const CardRow = () => {
     window.scrollTo(newX, 0);
     const windowScrollX = window.scrollX;
     if (newX !== window.scrollX) {
-      changeX({
+      updateScrollX({
         startX: clientX + windowScrollX - startScrollX,
         startScrollX: startScrollX,
       });
@@ -65,7 +65,7 @@ const CardRow = () => {
     if (scrollX.startX) {
       window.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('mouseup', handleMouseUp);
-      changeX({startX: null, startScrollX: null});
+      updateScrollX({startX: null, startScrollX: null});
     }
   }
 
@@ -73,7 +73,7 @@ const CardRow = () => {
     if (target.className !== 'card-row body') return;
     window.addEventListener('onmousemove', handleMouseMove);
     window.addEventListener('mouseup', handleMouseUp);
-    changeX({
+    updateScrollX({
       startX: clientX, 
       startScrollX: window.scrollX,
     });
@@ -91,6 +91,7 @@ const CardRow = () => {
       {idList.length < 10 &&
         <Card onChange={(payload) => handleChange(payload)}/>
       }
+      <div className="placeholder"/>
     </div>
   );
 };

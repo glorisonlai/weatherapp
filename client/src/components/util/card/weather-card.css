@@ -95,11 +95,6 @@
 }
 
 /* LOADING ANIMATION */
-.laoding-cont {
-  position: absolute;
-  right: 0px;
-  bottom: 0px;
-}
 
 .dot {
   width: 0.5rem;
@@ -113,12 +108,17 @@
   position: relative;
   animation: jump 1s infinite;
 }
-.dot:nth-child(2) {
+.dot:nth-child(1) {
   -webkit-animation-delay: 100ms;
   animation-delay: 100ms;
 }
 
 .dot:nth-child(2) {
+  -webkit-animation-delay: 200ms;
+  animation-delay: 200ms;
+}
+
+.dot:nth-child(3) {
   -webkit-animation-delay: 200ms;
   animation-delay: 200ms;
 }

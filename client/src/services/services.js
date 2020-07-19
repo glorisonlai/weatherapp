@@ -6,7 +6,7 @@ const Services = {
   },
 
   prepareUrl(path) {
-    return window.location.hostname + path;
+    return window.location.protocol + '//' + window.location.hostname + ':1337' + path;
   },
 
   async post(url, body) {

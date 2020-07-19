@@ -41,8 +41,6 @@ const CitySearcher = ({onSubmit, onBlur, initVal}) => {
     setLoading(true);
   }
 
-  console.log(cities);
-
   return (
     <div className="card search-card">
       <Autocomplete

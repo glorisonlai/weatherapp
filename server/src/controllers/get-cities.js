@@ -6,8 +6,6 @@ const Controllers = {
 
     const data = middleware.getCities(query);
 
-    console.log(data);
-
     return res.send(data);
   },
 }

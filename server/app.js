@@ -20,12 +20,13 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/open-weather', openWeatherRouter);
-app.use('/get-cities', citiesRouter);
-
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static('client/build'));
 }
+
+app.use('/open-weather', openWeatherRouter);
+app.use('/get-cities', citiesRouter);
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));

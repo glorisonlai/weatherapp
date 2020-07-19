@@ -22,7 +22,6 @@ const CitySearcher = ({onSubmit, onBlur, initVal}) => {
   }, [loading, id]);
 
   useEffect(() => {
-    console.log(value);
     if (value.length < 2) return;
 
     const getCities = async() => {

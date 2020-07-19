@@ -6,7 +6,7 @@ const Services = {
   },
 
   prepareUrl(path) {
-    return path;
+    return window.location.hostname + path;
   },
 
   async post(url, body) {

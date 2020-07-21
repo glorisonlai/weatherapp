@@ -6,7 +6,7 @@ const Services = {
   },
 
   prepareUrl(path) {
-    return window.location.protocol + '//' + window.location.hostname + ':' + process.env.PORT + path;
+    return window.location.protocol + '//' + window.location.hostname + ':' + process.env.REACT_APP_PORT + path;
   },
 
   async post(url, body) {

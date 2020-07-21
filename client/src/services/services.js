@@ -6,12 +6,12 @@ const Services = {
   },
 
   prepareUrl(path) {
-    return window.location.protocol + '//' + window.location.hostname + ':' + process.env.NODE_ENV + path;
+    return window.location.protocol + '//' + window.location.hostname + ':' + process.env.PORT + path;
   },
 
   async post(url, body) {
     const response = await fetch(url, {
-      method: 'POST',
+      method: 'POST', 
       body: body,
       headers: {'Content-Type': 'application/json'},
     });

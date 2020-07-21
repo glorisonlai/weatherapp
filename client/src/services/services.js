@@ -28,9 +28,11 @@ const Services = {
   },
 
   async getCities(data) {
+    console.log(data);
     const path='/get-cities';
     const url = this.prepareUrl(path);
     const body = this.prepareBody(data);
+    console.log(url, body);
 
     return JSON.parse(await this.post(url, body));
   }

@@ -11,7 +11,7 @@ var citiesRouter = require('./src/routes/get-cities');
 
 var app = express();
 
-const port = process.env.PORT || 1337;
+const port = process.env.REACT_APP_PORT || 1337;
 
 app.use(cors());
 app.use(logger('dev'));

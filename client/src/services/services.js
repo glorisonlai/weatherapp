@@ -34,6 +34,7 @@ const Services = {
     const path='get-cities';
     const url = this.prepareUrl(path);
     const body = this.prepareBody(data);
+    console.log(url);
 
     return JSON.parse(await this.post(url, body));
   }

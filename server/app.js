@@ -4,7 +4,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var cors = require('cors');
-require('dotenv').config();
+require('dotenv').config({path: './config/config.env'});
 
 var openWeatherRouter = require('./src/routes/open-weather');
 var citiesRouter = require('./src/routes/get-cities');
@@ -18,11 +18,11 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-
 app.use(express.static(path.join(__dirname, 'public')));
-if (process.env.NODE_ENV === 'production'){
+
+if (process.env.NODE_ENV === 'production') {
   app.use(express.static('client/build'));
-};
+}
 
 app.use('/open-weather', openWeatherRouter);
 app.use('/get-cities', citiesRouter);

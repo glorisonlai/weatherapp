@@ -1,4 +1,4 @@
-import React, {useReducer, useEffect} from 'react';
+import React, {useState, useReducer, useEffect} from 'react';
 import Card from './card/card';
 import Services from '../../services/services';
 
@@ -16,12 +16,14 @@ const reducer = (list, action) => {
 
 const CardRow = () => {
   const [idList, changeIdList] = useReducer(reducer, []);
-  let startX, scrollLeft;
+  const [scrollX, updateScrollX] = useState({
+    startX: null, 
+    startScrollX: null
+  });
+  const savedList = JSON.parse(window.localStorage.getItem('saved-ids'));
 
   useEffect(() => {
-    const savedList = JSON.parse(window.localStorage.getItem('saved-ids'));
     if (!savedList || !savedList.length) return;
-
     const validIds = savedList.filter(id => typeof(id) == 'number');
     
     const saveWeather = async () => {
@@ -35,8 +37,6 @@ const CardRow = () => {
 
   useEffect(() => {
     window.localStorage.setItem('saved-ids', JSON.stringify(idList.map((data) => data.id)));
-    const target = document.getElementsByClassName('card-row')[0];
-    target.scrollLeft = target.scrollWidth;
   }, [idList]);
 
   const handleChange = ({data, index}) => {
@@ -49,23 +49,34 @@ const CardRow = () => {
 
   // Click to scroll
   const handleMouseMove = ({clientX}) => {
-    const target = document.getElementsByClassName('card-row')[0];
-    const newX = clientX - target.offsetLeft;
-    const walk = (newX - startX);
-    target.scrollLeft = scrollLeft - walk;
+    const {startX, startScrollX} = scrollX;
+    const newX = startScrollX - clientX + startX;
+    window.scrollTo(newX, 0);
+    const windowScrollX = window.scrollX;
+    if (newX !== window.scrollX) {
+      updateScrollX({
+        startX: clientX + windowScrollX - startScrollX,
+        startScrollX: startScrollX,
+      });
+    }
   };
 
   const handleMouseUp = () => {
-    window.removeEventListener('mousemove', handleMouseMove);
-    window.removeEventListener('mouseup', handleMouseUp);
+    if (scrollX.startX) {
+      window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('mouseup', handleMouseUp);
+      updateScrollX({startX: null, startScrollX: null});
+    }
   }
 
-  const handleMouseDown = ({clientX}) => {
-    const target = document.getElementsByClassName('card-row')[0];
-    window.addEventListener('mousemove', handleMouseMove);
+  const handleMouseDown = ({target, clientX}) => {
+    if (target.className !== 'card-row body') return;
+    window.addEventListener('onmousemove', handleMouseMove);
     window.addEventListener('mouseup', handleMouseUp);
-    startX = clientX - target.offsetLeft;
-    scrollLeft = target.scrollLeft;
+    updateScrollX({
+      startX: clientX, 
+      startScrollX: window.scrollX,
+    });
   };
 
   return (

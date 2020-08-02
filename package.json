@@ -2,17 +2,20 @@
   "name": "weatherapp",
   "version": "0.1.0",
   "private": true,
-  "devDependencies": {
-    "concurrently": "^5.2.0"
+  "dependencies": {
+    "concurrently": "^5.2.0",
+    "react": "^16.13.1",
+    "react-scripts": "3.4.1"
   },
   "scripts": {
-    "dev-start": "npm run install-client && npm run install-server && npm run dev",
     "dev": "concurrently --kill-others \"cd client && npm start\" \"cd server && npm start\"",
+    "start": "node server/app.js",
     "build-client": "cd client && npm run build",
     "install-client": "cd client && npm install",
     "install-server": "cd server && npm install",
-    "heroku-postbuild": "npm run install-client && npm run install-server && npm run build-client",
-    "start": "node server/app.js"
+    "heroku-postbuild": "npm run install-client && npm run install-server && cd client && npm run build-client",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": "react-app"

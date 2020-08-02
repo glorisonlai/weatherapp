@@ -23,7 +23,7 @@ const Navbar = (props) => {
 					onClick={() => toggleSidebar()}
 				>
 					<FontAwesomeIcon icon={['fas', 'bars']} size="lg"/>
-					<h2 className="title">Weather - OLD</h2>
+					<h2 className="title">Weather</h2>
 				</a>
 			</nav>
 		);

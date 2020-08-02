@@ -2,9 +2,10 @@ import React, {useState, createContext, useContext} from 'react';
 
 // Create Global var Unit -> Changes in option are reflected through app
 const localUnit = window.localStorage.getItem('degree-unit');
-if (!localUnit) window.localStorage.setItem('degree-unit','C');
 
 const savedUnit = !!localUnit && 'FC'.includes(localUnit) ? localUnit : 'C';
+
+window.localStorage.setItem('degree-unit',savedUnit);
 
 const GlobalStateContext = createContext(savedUnit);
 const DispatchStateContext = createContext(undefined);

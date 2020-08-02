@@ -16,10 +16,7 @@ const reducer = (list, action) => {
 
 const CardRow = () => {
   const [idList, changeIdList] = useReducer(reducer, []);
-  const [scrollX, updateScrollX] = useState({
-    startX: null, 
-    startScrollX: null
-  });
+  let startX, scrollLeft;
 
   useEffect(() => {
     const savedList = JSON.parse(window.localStorage.getItem('saved-ids'));
@@ -50,34 +47,23 @@ const CardRow = () => {
 
   // Click to scroll
   const handleMouseMove = ({clientX}) => {
-    const {startX, startScrollX} = scrollX;
-    const newX = startScrollX - clientX + startX;
-    window.scrollTo(newX, 0);
-    const windowScrollX = window.scrollX;
-    if (newX !== window.scrollX) {
-      updateScrollX({
-        startX: clientX + windowScrollX - startScrollX,
-        startScrollX: startScrollX,
-      });
-    }
+    const target = document.getElementsByClassName('card-row')[0];
+    const newX = clientX - target.offsetLeft;
+    const walk = (newX - startX);
+    target.scrollLeft = scrollLeft - walk;
   };
 
   const handleMouseUp = () => {
-    if (!!scrollX.startX) {
-      window.removeEventListener('mousemove', handleMouseMove);
-      window.removeEventListener('mouseup', handleMouseUp);
-      updateScrollX({startX: null, startScrollX: null});
-    }
+    window.removeEventListener('mousemove', handleMouseMove);
+    window.removeEventListener('mouseup', handleMouseUp);
   }
 
-  const handleMouseDown = ({target, clientX}) => {
-    console.log(target, clientX);
-    window.addEventListener('onmousemove', handleMouseMove);
+  const handleMouseDown = ({clientX}) => {
+    const target = document.getElementsByClassName('card-row')[0];
+    window.addEventListener('mousemove', handleMouseMove);
     window.addEventListener('mouseup', handleMouseUp);
-    updateScrollX({
-      startX: clientX, 
-      startScrollX: window.scrollX,
-    });
+    startX = clientX - target.offsetLeft;
+    scrollLeft = target.scrollLeft;
   };
 
   return (

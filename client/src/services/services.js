@@ -6,7 +6,10 @@ const Services = {
   },
 
   prepareUrl(path) {
-    return window.location.protocol + '//' + window.location.hostname + ':1337' + path;
+    const {protocol, hostname} = window.location;
+    const PORT = process.env.PORT || 1337;
+
+    return `${protocol}//${hostname}:${PORT}/${path}`;
   },
 
   async post(url, body) {
@@ -20,7 +23,7 @@ const Services = {
   },
 
   async getWeather(data) {
-    const path = '/open-weather';
+    const path = 'open-weather';
     const url = this.prepareUrl(path);
     const body = this.prepareBody(data);
 
@@ -28,7 +31,7 @@ const Services = {
   },
 
   async getCities(data) {
-    const path='/get-cities';
+    const path='get-cities';
     const url = this.prepareUrl(path);
     const body = this.prepareBody(data);
 

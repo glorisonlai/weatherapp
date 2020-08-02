@@ -4,7 +4,8 @@ import React, {useState, createContext, useContext} from 'react';
 const localUnit = window.localStorage.getItem('degree-unit');
 
 const savedUnit = !!localUnit && 'FC'.includes(localUnit) ? localUnit : 'C';
-window.localStorage.setItem('degree-unit', savedUnit);
+
+window.localStorage.setItem('degree-unit',savedUnit);
 
 const GlobalStateContext = createContext(savedUnit);
 const DispatchStateContext = createContext(undefined);

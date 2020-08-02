@@ -5,16 +5,17 @@
 .name {
   padding-top: 5px;
   text-align: left;
+  word-wrap: normal;
+  font-size: 100%;
   padding-left: 2rem;
   float: left;
   width: 70%;
   cursor: pointer;
   filter: brightness(100%);
-  transition: 0.5s;
+  transition: filter 0.5s;
 }
 
 .name:hover {
-  transition: 0.5s;
   filter: brightness(80%);
 }
 
@@ -25,11 +26,10 @@
   width: 20%;
   cursor: pointer;
   filter: brightness(100%);
-  transition: 0.5s;
+  transition: filter 0.5s;
 }
 
 .button:hover {
-  transition: 0.5s;
   filter: brightness(80%);
 }
 
@@ -38,7 +38,6 @@
   pointer-events: none;
 }
 .current {
-  padding-top: 10px;
   text-align: right;
   float: left;
   font-size: 6vh;
@@ -108,17 +107,17 @@
   position: relative;
   animation: jump 1s infinite;
 }
-.dot:nth-child(1) {
+.dot:nth-child(2) {
   -webkit-animation-delay: 100ms;
   animation-delay: 100ms;
 }
 
-.dot:nth-child(2) {
+.dot:nth-child(3) {
   -webkit-animation-delay: 200ms;
   animation-delay: 200ms;
 }
 
-.dot:nth-child(3) {
+.dot:nth-child(4) {
   -webkit-animation-delay: 300ms;
   animation-delay: 300ms;
 }

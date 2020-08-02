@@ -2,6 +2,7 @@ const api = require('../api/open-weather');
 
 const Controllers = {
   async getWeather(req, res) {
+    console.log('MADE IT - CONTROLLERS'.green);
     const id = req.body.locId;
     const response = await api.getWeather(id);
 
@@ -33,6 +34,7 @@ const Controllers = {
       sunset: sys.sunset,
       timezone: timezone,
     }
+    console.log(data);
 
     return res.send(data);
   }

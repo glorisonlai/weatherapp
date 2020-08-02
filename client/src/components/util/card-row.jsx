@@ -20,10 +20,11 @@ const CardRow = () => {
     startX: null, 
     startScrollX: null
   });
-  const savedList = JSON.parse(window.localStorage.getItem('saved-ids'));
 
   useEffect(() => {
+    const savedList = JSON.parse(window.localStorage.getItem('saved-ids'));
     if (!savedList || !savedList.length) return;
+
     const validIds = savedList.filter(id => typeof(id) == 'number');
     
     const saveWeather = async () => {

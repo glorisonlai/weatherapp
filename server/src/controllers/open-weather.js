@@ -34,7 +34,6 @@ const Controllers = {
       sunset: sys.sunset,
       timezone: timezone,
     }
-    console.log(data);
 
     return res.send(data);
   }

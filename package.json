@@ -2,9 +2,8 @@
   "name": "weatherapp",
   "version": "0.1.0",
   "private": true,
-  "dependencies": {
-    "react": "^16.13.1",
-    "react-scripts": "3.4.1"
+  "devDependencies": {
+    "concurrently": "^5.2.0"
   },
   "scripts": {
     "dev-start": "npm run install-client && npm run install-server && npm run dev",
@@ -29,8 +28,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "devDependencies": {
-    "concurrently": "^5.2.0"
   }
 }

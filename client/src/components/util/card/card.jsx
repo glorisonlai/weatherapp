@@ -25,8 +25,8 @@ const Card = ({ onChange, index, initData }) => {
       <WeatherCard index={index} data={initData} onDelete={(index) => onChange({index: index})} onEdit={() => setActive(true)}/>
     :
       <a className="card unselectable hover-card addButton" onClick={() => setActive(true)}>
-        <span className="inner-text">
-          <FontAwesomeIcon icon={['fas', 'plus-circle']} size="2x"/>
+        <span id="add-text">
+          <FontAwesomeIcon style={{paddingTop:'60%', width: '100%', display: 'inline-block'}} icon={['fas', 'plus-circle']} size="2x"/>
           <p>Add City</p>
         </span>
       </a>

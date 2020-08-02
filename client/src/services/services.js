@@ -7,7 +7,7 @@ const Services = {
 
   prepareUrl(path) {
     const {protocol, hostname} = window.location;
-    const PORT = process.env.REACT_APP_PORT || 1337;
+    const PORT = process.env.PORT || 31337;
 
     return `${protocol}//${hostname}:${PORT}/${path}`;
   },

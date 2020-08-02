@@ -2,8 +2,10 @@
   "name": "weatherapp",
   "version": "0.1.0",
   "private": true,
-  "devDependencies": {
-    "concurrently": "^5.2.0"
+  "dependencies": {
+    "concurrently": "^5.2.0",
+    "react": "^16.13.1",
+    "react-scripts": "3.4.1"
   },
   "scripts": {
     "dev": "concurrently --kill-others \"cd client && npm start\" \"cd server && npm start\"",

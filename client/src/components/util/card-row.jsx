@@ -35,6 +35,8 @@ const CardRow = () => {
 
   useEffect(() => {
     window.localStorage.setItem('saved-ids', JSON.stringify(idList.map((data) => data.id)));
+    const target = document.getElementsByClassName('card-row')[0];
+    target.scrollLeft = target.scrollWidth;
   }, [idList]);
 
   const handleChange = ({data, index}) => {

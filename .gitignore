@@ -14,7 +14,7 @@
 /build
 
 # keys
-/server/.env
+/server/config/config.env
 
 # misc
 .DS_Store

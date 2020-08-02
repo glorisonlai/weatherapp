@@ -20,7 +20,10 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use(express.static('client/build'));
+if (process.env.NODE_ENV === 'production') {
+  console.log('Production build');
+  app.use(express.static('client/build'));
+}
 
 app.use('/open-weather', openWeatherRouter);
 app.use('/get-cities', citiesRouter);

@@ -30,62 +30,70 @@ const WeatherCard = ({index, data, onDelete, onEdit}) => {
 
   return !!name ? (
     <div className='card weather-card unselectable'>
+      {/* Card Head */}
       <div className='card-head'>
         <a className='name' onClick={() => onEdit(name, country)} >
-          <span>{name}</span>
+          {name}
         </a>
         <a className='button' onClick={() => onDelete(index)} >
           <FontAwesomeIcon icon={['fas', 'times']} size={'xs'}/>
         </a>
       </div>
-      <div className='card-body'>
-        <div className='main'>
-          <span className='current'>{convertTemp(current)}&#176;</span>
-          <div className='status'>
-            <img id='img' src={!!icon ? `http://openweathermap.org/img/wn/${icon}@2x.png` : ''} alt=""/>
-          </div>
-          <span id='desc' className='capitalize'>{desc}</span>
+
+      {/* Main degree + img */}
+      <div className='main'>
+        <span className='current'>{convertTemp(current)}&#176;</span>
+        <div className='status'>
+          <img id='img' src={!!icon ? `http://openweathermap.org/img/wn/${icon}@2x.png` : ''} alt=""/>
         </div>
-        <div style={styles.divider}/>
-        <div className='container'>
-          <div className='contain-left'>
-            <span>Min</span>
-            <span className='stat'>{convertTemp(min)}</span>
-          </div>
-          <div className='contain-right'>
-            <span>Max</span>
-            <span className='stat'>{convertTemp(max)}</span>
-          </div>
+        <span id='desc' className='capitalize'>{desc}</span>
+      </div>
+      <div style={styles.divider}/>
+
+      {/* Min/Max degrees */}
+      <div className='container'>
+        <div className='contain-left'>
+          <span>Min</span>
+          <span className='stat'>{convertTemp(min)}</span>
         </div>
-        <div style={styles.divider}/>
-        <div className='container'>
-          <div className='contain-left'>
-            <span>Windspeed</span>
-            <span className='stat'>
-              {windspeed}m/s
-              <div style={{transform: `rotate(${winddeg}deg)`}}>
-                <FontAwesomeIcon icon={['fas', 'arrow-up']} />
-              </div>
-              </span>
-          </div>
-          <div className='contain-right'>
-            <span>Visibility</span>
-            <span className='stat'>{convertDist(vision)}</span>
-          </div>
+        <div className='contain-right'>
+          <span>Max</span>
+          <span className='stat'>{convertTemp(max)}</span>
         </div>
-        <div style={styles.divider}/>
-        <div className='container'>
-          <div className='contain-left'>
-            <span>Pressure</span>
-            <span className='stat'>{pressure}hPa</span>
-          </div>
-          <div className='contain-right'>
-            <span>Humidity</span>
-            <span className='stat'>{humidity}%</span>
-          </div>
+      </div>
+      <div style={styles.divider}/>
+
+      {/* Windspeed/Visibility */}
+      <div className='container'>
+        <div className='contain-left'>
+          <span>Windspeed</span>
+          <span className='stat'>
+            {windspeed}m/s
+            <div style={{transform: `rotate(${winddeg}deg)`}}>
+              <FontAwesomeIcon icon={['fas', 'arrow-up']} />
+            </div>
+            </span>
         </div>
-      </div> 
-    </div>
+        <div className='contain-right'>
+          <span>Visibility</span>
+          <span className='stat'>{convertDist(vision)}</span>
+        </div>
+      </div>
+      <div style={styles.divider}/>
+
+      {/* Pressure/Humidity */}
+      <div className='container'>
+        <div className='contain-left'>
+          <span>Pressure</span>
+          <span className='stat'>{pressure}hPa</span>
+        </div>
+        <div className='contain-right'>
+          <span>Humidity</span>
+          <span className='stat'>{humidity}%</span>
+        </div>
+      </div>
+      <div style={styles.divider}/>
+    </div> 
   ) : (
     <div className='card weather-card'>
       <div className='card-head'>

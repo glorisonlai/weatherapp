@@ -2,7 +2,6 @@ const api = require('../api/open-weather');
 
 const Controllers = {
   async getWeather(req, res) {
-    console.log('MADE IT - CONTROLLERS'.green);
     const id = req.body.locId;
     const response = await api.getWeather(id);
 

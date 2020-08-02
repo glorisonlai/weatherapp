@@ -7,6 +7,15 @@
   pointer-events: none;
 }
 
+.img {
+  display: block;
+  height: auto;
+  width: auto;
+  max-height: 100vh;
+  min-height: 500px;
+  filter: brightness(1.15);
+}
+
 .fade-in {
   animation: fadeIn ease var(--ease-in-timer);
   -webkit-animation: fadeIn ease var(--ease-in-timer);

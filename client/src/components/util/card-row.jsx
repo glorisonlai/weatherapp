@@ -63,7 +63,7 @@ const CardRow = () => {
   };
 
   const handleMouseUp = () => {
-    if (scrollX.startX) {
+    if (!!scrollX.startX) {
       window.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('mouseup', handleMouseUp);
       updateScrollX({startX: null, startScrollX: null});
@@ -71,7 +71,7 @@ const CardRow = () => {
   }
 
   const handleMouseDown = ({target, clientX}) => {
-    if (target.className !== 'card-row body') return;
+    console.log(target, clientX);
     window.addEventListener('onmousemove', handleMouseMove);
     window.addEventListener('mouseup', handleMouseUp);
     updateScrollX({

@@ -22,14 +22,15 @@ const CitySearcher = ({onSubmit, onBlur, initVal}) => {
   }, [loading, id]);
 
   useEffect(() => {
-    if (value.length < 2) return;
-
-    const getCities = async() => {
-      setCities(await Services.getCities({query: value}));
-    }
+    if (!value.length) {
+      setCities([]);
+    } else {
+      const getCities = async() => {
+        setCities(await Services.getCities({query: value}));
+      }
 
     getCities();
-    setCities([]);
+  }
   }, [value])
 
   function createLabel({name, country}) {

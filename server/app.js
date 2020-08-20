@@ -4,7 +4,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var cors = require('cors');
-require('dotenv').config();
+if (!process.env.NODE_ENV) require('dotenv').config();
 
 var openWeatherRouter = require('./src/routes/open-weather');
 var citiesRouter = require('./src/routes/get-cities');

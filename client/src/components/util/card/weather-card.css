@@ -13,10 +13,19 @@
   cursor: pointer;
   filter: brightness(100%);
   transition: filter 0.5s;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .name:hover {
   filter: brightness(80%);
+  overflow: visible;
+  text-overflow: clip;
+  animation: text-scroll 1s infinite;
+}
+
+@keyframes text-scroll {
+  100% {transform: translateX(calc(100px - 100%));}
 }
 
 .button {

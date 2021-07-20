@@ -9,7 +9,7 @@ const Services = {
     const { protocol, hostname } = window.location;
     const PORT = process.env.PORT || 1337;
 
-    return `${protocol}//${hostname}:${PORT}/${path}`;
+    return `${protocol}//${hostname}/${path}`;
   },
 
   async post(url, body) {
